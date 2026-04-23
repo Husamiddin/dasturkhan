@@ -3,246 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasturkhan | Pro Fresh Menu</title>
+    <title>Dasturkhan | Experience Premium</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
-        :root {
-            --primary: #2D5A27; /* Ishtaha ochar yashil */
-            --accent: #D4AF37;  /* Premium oltin */
-            --light-bg: #FCFAF5; 
-            --card: #ffffff;
-            --text: #333;
-            --desc: #777;
+        @import url('https://fonts.googleapis.com/css2?family=Mogra&family=Oswald:wght@200..700&family=Playwrite+IE:wght@100..400&display=swap');
+        :root { 
+            --gold: #D4AF37; 
+            --white: #ffffff; 
+            --glass: rgba(15, 15, 15, 0.85); 
+            --accent: #1e3d1a; 
+            --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F1D18A 50%, #D4AF37 100%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            background-color: var(--light-bg);
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            color: var(--text);
+            background: #050505 url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--white);
             font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* --- HERO --- */
-        .hero {
-            padding: 60px 20px;
-            text-align: center;
-            background: #fff;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            border-radius: 0 0 50px 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        .overlay { 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.92)); 
+            min-height: 100vh; 
+            padding-bottom: 120px; 
         }
 
-        .brand-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 5rem);
-            color: var(--primary);
-            font-style: italic;
-            margin-bottom: 30px;
+        /* Navigatsiya effekti */
+        header {
+    text-align: center; 
+    padding: 40px 10px; /* Balandlikni kamaytirdik */
+    background: rgba(0,0,0,0.7); 
+    backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--gold); /* Tilla chiziq faqat pastda bo'ladi */
+    position: relative;
+}
+
+.logo {
+    font-family: "Playwrite IE", cursive;
+    font-size: clamp(2.5rem, 8vw, 4.5rem); /* Mobil qurilmalar uchun moslashuvchan */
+    font-weight: 900;
+    text-transform: uppercase; 
+    letter-spacing: 6px;
+    background: var(--gold-gradient);
+    --webkit-background-clip: text;
+    color: black; 
+    /* Matn orqasidagi qora soya uni o'qishni osonlashtiradi */
+    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.8));
+    margin: 0 auto;
+}
+
+        /* Ofitsiant chaqirish */
+        .waiter-btn {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: var(--gold-gradient); color: #000; border: none;
+            padding: 12px 25px; border-radius: 50px; font-weight: 800;
+            cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transition: 0.3s;
         }
 
-        .promo-wrap { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .promo-box {
-            width: 280px; height: 380px; border-radius: 30px; overflow: hidden;
-            border: 5px solid #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            position: relative; transition: 0.4s;
-        }
-        .promo-box img { width: 100%; height: 100%; object-fit: cover; }
-        .promo-box:hover { transform: translateY(-10px); }
-
-        /* --- NAV --- */
-        .nav {
-            position: sticky; top: 0; z-index: 1000;
-            background: rgba(255,255,255,0.9); backdrop-filter: blur(15px);
-            padding: 15px; display: flex; justify-content: center; gap: 10px;
+        /* Qidiruv tizimi */
+        .sticky-nav {
+            position: sticky; top: 0; z-index: 999;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
+            padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .btn-lang {
-            padding: 10px 25px; border-radius: 50px; border: 2px solid var(--primary);
-            background: transparent; color: var(--primary); font-weight: 700; cursor: pointer;
+        .search-box { max-width: 600px; margin: 0 auto; padding: 0 20px; }
+        #searchInput {
+            width: 100%; padding: 15px 25px; border-radius: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(255,255,255,0.05);
+            color: white; font-size: 1rem; outline: none; transition: 0.4s;
         }
-        .btn-lang.active { background: var(--primary); color: #fff; }
+        #searchInput:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
 
-        /* --- GRID --- */
-        .container { max-width: 1200px; margin: 40px auto 120px; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+        /* Kategoriyalar */
+        .categories {
+            display: flex; gap: 12px; overflow-x: auto; 
+            padding: 20px; scrollbar-width: none; justify-content: start;
+        }
+        @media (min-width: 768px) { .categories { justify-content: center; } }
+
+        .cat-btn {
+            padding: 10px 25px; border-radius: 50px; border: 1px solid #333;
+            background: var(--glass); color: #aaa; cursor: pointer; 
+            white-space: nowrap; transition: 0.4s; font-weight: 500;
+        }
+        .cat-btn.active { 
+            background: var(--gold-gradient); color: #000; 
+            border-color: transparent; font-weight: 800; transform: scale(1.05);
+        }
+
+        /* Taom kartalari */
+        .menu-grid {
+            max-width: 1400px; margin: 20px auto;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px; padding: 20px;
+        }
 
         .card {
-            background: var(--card); border-radius: 40px; overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05); position: relative; transition: 0.3s;
+            background: var(--glass); border-radius: 35px; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
-        .card:hover { transform: scale(1.02); }
+        .card:hover { transform: translateY(-15px); border-color: var(--gold); }
 
-        .card-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-        .card-info { padding: 25px; }
-        .card-name { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 5px; }
+        .card-img { 
+            width: 100%; aspect-ratio: 1/1; object-fit: cover; 
+            transition: 0.6s; filter: brightness(0.9);
+        }
+        .card:hover .card-img { transform: scale(1.1); filter: brightness(1.1); }
         
-        /* TAOM TARKIBI */
-        .card-desc { font-size: 0.9rem; color: var(--desc); margin-bottom: 15px; line-height: 1.4; }
-        
-        .card-price { font-size: 1.2rem; color: var(--accent); font-weight: 800; }
+        .card-info { padding: 30px; background: linear-gradient(to top, #000, transparent); }
+        .card-title { font-size: 1.5rem; color: var(--gold); font-weight: 800; margin-bottom: 10px; }
+        .card-price { font-size: 1.4rem; font-weight: 900; color: #fff; letter-spacing: 1px; }
 
-        .add-btn {
+        .btn-add {
             position: absolute; bottom: 25px; right: 25px;
-            background: var(--primary); color: #fff; border: none;
-            width: 55px; height: 55px; border-radius: 18px;
-            font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            background: var(--gold-gradient); color: #000; border: none;
+            width: 55px; height: 55px; border-radius: 20px; cursor: pointer;
+            font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4); transition: 0.3s;
+        }
+        .btn-add:active { transform: scale(0.8); }
+
+        /* Savatcha (Floating) */
+        .cart-float {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(200px);
+            width: 90%; max-width: 500px; background: var(--accent);
+            padding: 20px 40px; border-radius: 30px; display: flex;
+            justify-content: space-between; align-items: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9); z-index: 1000; transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .cart-float.active { transform: translateX(-50%) translateY(0); }
+        
+        .reset-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
+            color: white; padding: 10px 20px; border-radius: 15px; cursor: pointer;
         }
 
-        /* --- SMART CALCULATOR BAR --- */
-        .calc-bar {
-            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(150px);
-            width: 95%; max-width: 550px; background: var(--primary);
-            padding: 15px 25px; border-radius: 25px; color: #fff;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 20px 40px rgba(45, 90, 39, 0.4); z-index: 2000;
-            transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        /* Til almashinuvi */
+        .lang-switch { margin-top: 30px; display: flex; justify-content: center; gap: 15px; }
+        .btn-lang {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--gold); padding: 10px 30px; border-radius: 50px;
+            cursor: pointer; font-weight: 600; transition: 0.3s;
         }
-        .calc-bar.active { transform: translateX(-50%) translateY(0); }
-
-        .clear-btn {
-            background: rgba(255,255,255,0.2); border: none; color: #fff;
-            padding: 8px 15px; border-radius: 12px; cursor: pointer; font-size: 0.8rem;
-        }
-
-        @media (max-width: 600px) {
-            .brand-logo { font-size: 3.5rem; }
-            .promo-box { width: 100%; height: 350px; }
-        }
+        .btn-lang.active { background: var(--gold); color: #000; border-color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <h1 class="brand-logo">Dasturkhan</h1>
-        <div class="promo-wrap">
-            <div class="promo-box"><img src="1-menu.jpg"></div>
-            <div class="promo-box"><img src="2-menu.jpg"></div>
+<div class="overlay">
+    <button class="waiter-btn animate__animated animate__pulse animate__infinite" onclick="alert('Waiter called to your table!')">
+        <i class="fas fa-bell"></i>
+    </button>
+
+    <header>
+        <div class="logo animate__animated animate__zoomIn">Dasturkhan</div>
+        <div class="lang-switch">
+            <button class="btn-lang active" id="ruBtn" onclick="setLang('ru')">РУССКИЙ</button>
+            <button class="btn-lang" id="enBtn" onclick="setLang('en')">ENGLISH</button>
         </div>
     </header>
 
-    <nav class="nav">
-        <button class="btn-lang active" onclick="setLang('ru')">РУССКИЙ</button>
-        <button class="btn-lang" onclick="setLang('en')">ENGLISH</button>
-    </nav>
-
-    <div class="container">
-        <div class="grid" id="menu-grid"></div>
-    </div>
-
-    <div class="calc-bar" id="calc-bar">
-        <div style="display:flex; flex-direction:column;">
-            <span id="ui-count" style="font-weight:800; font-size:1.1rem;">0 БЛЮД</span>
-            <button class="clear-btn" onclick="clearCart()" id="ui-clear">Очистить</button>
+    <div class="sticky-nav">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Поиск вкусных блюд..." onkeyup="filterMenu()">
         </div>
-        <div id="ui-total" style="font-size:1.5rem; font-weight:800; color: var(--accent);">0 UZS</div>
+        <div class="categories" id="catBar"></div>
     </div>
 
-    <script>
-        const menuItems = [
-            { 
-                id: 1, 
-                ru: "Шакар об", en: "Shakar Ob", 
-                ruDesc: "Свежие томаты, тонкий лук и восточные специи.", 
-                enDesc: "Fresh tomatoes, thin sliced onions and oriental spices.",
-                p: 35000, img: "shakar ob.jpg" 
-            },
-            { 
-                id: 2, 
-                ru: "Ачук-чучук", en: "Achuchuk", 
-                ruDesc: "Классический узбекский салат из спелых помидоров.", 
-                enDesc: "Classic Uzbek salad with ripe tomatoes and onions.",
-                p: 30000, img: "ashuk.jpg" 
-            },
-            { 
-                id: 3, 
-                ru: "Греческий салат", en: "Greek Salad", 
-                ruDesc: "Сыр фета, маслины, свежие овощи и оливковое масло.", 
-                enDesc: "Feta cheese, olives, fresh veggies and olive oil.",
-                p: 60000, img: "pomidor salar grechiski.jpg" 
-            },
-            { 
-                id: 7, 
-                ru: "Хрустящие баклажаны", en: "Crispy Eggplant", 
-                ruDesc: "Обжаренные баклажаны в кисло-сладком соусе.", 
-                enDesc: "Deep-fried eggplants with sweet and sour sauce.",
-                p: 60000, img: "baklachan.jpg" 
-            },
-            { 
-                id: 10, 
-                ru: "Мастава", en: "Mastava", 
-                ruDesc: "Густой узбекский суп с рисом, мясом и овощами.", 
-                enDesc: "Traditional rice soup with meat and vegetables.",
-                p: 40000, img: "mastava.jpg" 
-            },
-            { 
-                id: 11, 
-                ru: "Тыквенный крем суп", en: "Pumpkin Cream Soup", 
-                ruDesc: "Нежная тыква, сливки и ароматные гренки.", 
-                enDesc: "Smooth pumpkin purée, cream and toasted croutons.",
-                p: 30000, img: "krem sup.jpg" 
-            }
-        ];
+    <div class="menu-grid" id="menuContainer"></div>
 
-        let cart = [];
-        let lang = 'ru';
+    <div class="cart-float" id="cartFloat">
+        <div>
+            <div id="cartCount" style="font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gold);">0 БЛЮД</div>
+            <div id="cartTotal" style="font-size: 1.8rem; font-weight: 900;">0 UZS</div>
+        </div>
+        <button class="reset-btn" onclick="location.reload()">Reset</button>
+    </div>
+</div>
 
-        function setLang(l) {
-            lang = l;
-            document.querySelectorAll('.btn-lang').forEach(b => {
-                b.classList.toggle('active', b.innerText.toLowerCase().includes(l));
-            });
-            document.getElementById('ui-clear').innerText = lang === 'ru' ? 'Очистить' : 'Clear';
-            render();
-            updateCalc();
-        }
+<script>
+    // RASM NOMLARI O'ZGARTIRILMADI
+    const menuData = [
+        { cat: 'salat', ru: "Шакароб", en: "Shakarob", p: 35000, img: "shakar ob.jpg" },
+        { cat: 'salat', ru: "Ачик-чуchuk", en: "Achuchuk", p: 30000, img: "ashuk.jpg" },
+        { cat: 'salat', ru: "Греческий салат", en: "Greek Salad", p: 60000, img: "pomidor salar grechiski.jpg" },
+        { cat: 'salat', ru: "Греческий", en: "Greek Salad V2", p: 60000, img: "2 chi grechiski.jpg" },
+        { cat: 'salat', ru: "Хрустящие баклажаны", en: "Crispy Eggplant", p: 60000, img: "baklachan.jpg" },
+        { cat: 'salat', ru: "Лосось на подушке", en: "Salmon on Pillow", p: 80000, img: "losoya salat.jpg" },
+        { cat: 'salat', ru: "Креветки с рукколой", en: "Shrimp & Rucola", p: 80000, img: "krevetki salat.jpg" },
+        { cat: 'salat', ru: "Груша в карамели", en: "Caramel Pear", p: 60000, img: "karamamel.jpg" },
+        { cat: 'salat', ru: "Рубиновая свёкла", en: "Beetroot Salad", p: 50000, img: "sbekla salat.jpg" },
+        { cat: 'zakuska', ru: "Сырная тарелка", en: "Cheese Plate", p: 170000, img: "cheese plate.jpg" },
+        { cat: 'zakuska', ru: "Антипаста Ciao", en: "Antipasta Ciao", p: 200000, img: "ciao.jpg" },
+        { cat: 'zakuska', ru: "Долма", en: "Dolma", p: 60000, img: "dolma.jpg" },
+        { cat: 'zakuska', ru: "Тартар из говядины", en: "Beef Tartare", p: 90000, img: "tartare.jpg" },
+        { cat: 'zakuska', ru: "Биф-ролл", en: "Beef Roll", p: 80000, img: "roll.jpg" },
+        { cat: 'zakuska', ru: "Самса мясная", en: "Meat Somsa", p: 25000, img: "gosht somsa.jpg" },
+        { cat: 'pasta', ru: "Болоньезе", en: "Bolognese", p: 60000, img: "bolognese.jpg" },
+        { cat: 'pasta', ru: "Карбонара с уткой", en: "Duck Carbonara", p: 60000, img: "carbonara.jpg" },
+        { cat: 'steak', ru: "Рибай стейк", en: "Ribeye Steak", p: 60000, img: "steak.jpg" },
+        { cat: 'steak', ru: "Бон филе", en: "Bon Fillet", p: 180000, img: "fillet.jpg" },
+        { cat: 'first', ru: "Mastava", en: "Mastava", p: 40000, img: "mastava.jpg" },
+        { cat: 'first', ru: "Крем суп", en: "Cream Soup", p: 30000, img: "krem sup.jpg" },
+        { cat: 'drinks', ru: "Лимонад Манго-лайм", en: "Mango-Lime Lemonade", p: 90000, img: "mango lime.jpg" },
+        { cat: 'drinks', ru: "Кофе Латте", en: "Latte Coffee", p: 35000, img: "latte.jpg" }
+    ];
 
-        function render() {
-            const grid = document.getElementById('menu-grid');
-            grid.innerHTML = '';
-            menuItems.forEach(item => {
-                const name = lang === 'ru' ? item.ru : item.en;
-                const desc = lang === 'ru' ? item.ruDesc : item.enDesc;
-                grid.innerHTML += `
-                    <div class="card">
-                        <img src="${item.img}" class="card-img" onerror="this.src='https://via.placeholder.com/400'">
-                        <div class="card-info">
-                            <div class="card-name">${name}</div>
-                            <div class="card-desc">${desc}</div>
-                            <div class="card-price">${item.p.toLocaleString()} UZS</div>
-                            <button class="add-btn" onclick="add(${item.id})"><i class="fas fa-plus"></i></button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
+    let lang = 'ru';
+    let currentCat = 'all';
+    let cart = [];
 
-        function add(id) {
-            const item = menuItems.find(i => i.id === id);
-            cart.push(item);
-            document.getElementById('calc-bar').classList.add('active');
-            updateCalc();
-        }
+    const cats = {
+        ru: { all: "Все меню", salat: "Салаты", zakuska: "Закуски", first: "Первые блюда", pasta: "Пасты", steak: "Стейки", drinks: "Бар" },
+        en: { all: "Full Menu", salat: "Salads", zakuska: "Starters", first: "Main Soups", pasta: "Pastas", steak: "Steaks", drinks: "Bar" }
+    };
 
-        function clearCart() {
-            cart = [];
-            document.getElementById('calc-bar').classList.remove('active');
-            updateCalc();
-        }
+    function setLang(l) {
+        lang = l;
+        document.getElementById('ruBtn').classList.toggle('active', l==='ru');
+        document.getElementById('enBtn').classList.toggle('active', l==='en');
+        document.getElementById('searchInput').placeholder = l==='ru' ? "Поиск вкусных блюд..." : "Search delicious food...";
+        renderCats();
+        filterMenu();
+    }
 
-        function updateCalc() {
-            let total = 0;
-            cart.forEach(i => total += i.p);
-            const countTxt = lang === 'ru' ? 'БЛЮД' : 'ITEMS';
-            document.getElementById('ui-count').innerText = `${cart.length} ${countTxt}`;
-            document.getElementById('ui-total').innerText = total.toLocaleString() + " UZS";
-        }
+    function renderCats() {
+        const nav = document.getElementById('catBar');
+        nav.innerHTML = Object.keys(cats[lang]).map(k => `
+            <button class="cat-btn ${currentCat===k?'active':''}" onclick="setCategory('${k}')">${cats[lang][k]}</button>
+        `).join('');
+    }
 
-        setLang('ru');
-    </script>
+    function setCategory(c) {
+        currentCat = c;
+        renderCats();
+        filterMenu();
+    }
+
+    function filterMenu() {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = menuData.filter(i => {
+            const name = lang === 'ru' ? i.ru.toLowerCase() : i.en.toLowerCase();
+            return (currentCat === 'all' || i.cat === currentCat) && name.includes(q);
+        });
+        renderMenu(filtered);
+    }
+
+    function renderMenu(items) {
+        const container = document.getElementById('menuContainer');
+        container.innerHTML = items.map((i, index) => `
+            <div class="card animate__animated animate__fadeInUp" style="animation-delay: ${index * 0.05}s">
+                <img src="${i.img}" class="card-img" onerror="this.src='https://via.placeholder.com/400x400/111/D4AF37?text=Dasturkhan'">
+                <div class="card-info">
+                    <div class="card-title">${lang === 'ru' ? i.ru : i.en}</div>
+                    <div class="card-price">${i.p.toLocaleString()} UZS</div>
+                    <button class="btn-add" onclick="addToCart(${i.p})"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function addToCart(price) {
+        cart.push(price);
+        const total = cart.reduce((a, b) => a + b, 0);
+        const cartEl = document.getElementById('cartFloat');
+        cartEl.classList.add('active');
+        document.getElementById('cartCount').innerText = lang === 'ru' ? `${cart.length} БЛЮД` : `${cart.length} ITEMS`;
+        document.getElementById('cartTotal').innerText = `${total.toLocaleString()} UZS`;
+        
+        // Kichik "sakrash" animatsiyasi
+        cartEl.classList.remove('animate__pulse');
+        void cartEl.offsetWidth; 
+        cartEl.classList.add('animate__animated', 'animate__pulse');
+    }
+
+    setLang('ru');
+</script>
 </body>
 </html>
