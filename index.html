@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasturkhan | Experience Premium</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dasturkhan Bar</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -35,31 +35,28 @@
             padding-bottom: 120px; 
         }
 
-        /* Navigatsiya effekti */
         header {
-    text-align: center; 
-    padding: 40px 10px; /* Balandlikni kamaytirdik */
-    background: rgba(0,0,0,0.7); 
-    backdrop-filter: blur(10px);
-    border-bottom: 3px solid var(--gold); /* Tilla chiziq faqat pastda bo'ladi */
-    position: relative;
-}
+            text-align: center; 
+            padding: 40px 10px;
+            background: rgba(0,0,0,0.7); 
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--gold);
+            position: relative;
+        }
 
-.logo {
-    font-family: "Playwrite IE", cursive;
-    font-size: clamp(2.5rem, 8vw, 4.5rem); /* Mobil qurilmalar uchun moslashuvchan */
-    font-weight: 900;
-    text-transform: uppercase; 
-    letter-spacing: 6px;
-    background: var(--gold-gradient);
-    --webkit-background-clip: text;
-    color: black; 
-    /* Matn orqasidagi qora soya uni o'qishni osonlashtiradi */
-    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.8));
-    margin: 0 auto;
-}
+        /* LOGO MOBIL VA PC UCHUN MOSLASHDI */
+        .logo {
+            font-family: "Playwrite IE", cursive;
+            font-size: clamp(2.2rem, 10vw, 4.5rem);
+            font-weight: 900;
+            text-transform: uppercase; 
+            letter-spacing: 6px;
+            background: var(--gold-gradient);
+            --webkit-background-clip: text;
+            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.8));
+            margin: 0 auto;
+        }
 
-        /* Ofitsiant chaqirish */
         .waiter-btn {
             position: fixed; top: 20px; right: 20px; z-index: 1000;
             background: var(--gold-gradient); color: #000; border: none;
@@ -68,7 +65,6 @@
             transition: 0.3s;
         }
 
-        /* Qidiruv tizimi */
         .sticky-nav {
             position: sticky; top: 0; z-index: 999;
             background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
@@ -79,15 +75,14 @@
         #searchInput {
             width: 100%; padding: 15px 25px; border-radius: 50px;
             border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(255,255,255,0.05);
-            color: white; font-size: 1rem; outline: none; transition: 0.4s;
+            color: white; font-size: 1rem; outline: none;
         }
-        #searchInput:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
 
-        /* Kategoriyalar */
         .categories {
             display: flex; gap: 12px; overflow-x: auto; 
             padding: 20px; scrollbar-width: none; justify-content: start;
         }
+        .categories::-webkit-scrollbar { display: none; }
         @media (min-width: 768px) { .categories { justify-content: center; } }
 
         .cat-btn {
@@ -100,83 +95,98 @@
             border-color: transparent; font-weight: 800; transform: scale(1.05);
         }
 
-        /* Taom kartalari */
+        /* TUGMALAR DIZAYNI */
+        .lang-switch { margin-top: 20px; display: flex; justify-content: center; gap: 10px; }
+        .btn-lang {
+            background: transparent; border: 1px solid var(--gold);
+            color: var(--gold); padding: 8px 20px; border-radius: 50px;
+            cursor: pointer; font-weight: 800; transition: 0.3s;
+        }
+        .btn-lang.active { background: var(--gold-gradient); color: #000; border-color: transparent; }
+
+        /* MENU GRID - PC VA ANDROID UCHUN ALOHIDA */
         .menu-grid {
             max-width: 1400px; margin: 20px auto;
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px; padding: 20px;
+            display: grid;
+            padding: 15px;
+            /* DEFAULT: Android/Mobil uchun 2 ta ustun */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        /* PC UCHUN 4 TA USTUN */
+        @media (min-width: 1024px) {
+            .menu-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        }
+
+        /* PLANSHET UCHUN 3 TA USTUN */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
         }
 
         .card {
-            background: var(--glass); border-radius: 35px; overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--glass); border-radius: 25px; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.4s;
             position: relative;
         }
-        .card:hover { transform: translateY(-15px); border-color: var(--gold); }
 
-        .card-img { 
-            width: 100%; aspect-ratio: 1/1; object-fit: cover; 
-            transition: 0.6s; filter: brightness(0.9);
-        }
-        .card:hover .card-img { transform: scale(1.1); filter: brightness(1.1); }
+        .card-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; transition: 0.5s; }
+        .card-info { padding: 15px; background: linear-gradient(to top, #000, transparent); }
         
-        .card-info { padding: 30px; background: linear-gradient(to top, #000, transparent); }
-        .card-title { font-size: 1.5rem; color: var(--gold); font-weight: 800; margin-bottom: 10px; }
-        .card-price { font-size: 1.4rem; font-weight: 900; color: #fff; letter-spacing: 1px; }
+        /* MOBILDA MATN O'LCHAMI */
+        .card-title { font-size: 1rem; color: var(--gold); font-weight: 800; margin-bottom: 5px; height: 2.4em; overflow: hidden; }
+        .card-price { font-size: 1.1rem; font-weight: 900; color: #fff; }
+
+        @media (min-width: 768px) {
+            .card-info { padding: 25px; }
+            .card-title { font-size: 1.4rem; }
+            .card-price { font-size: 1.3rem; }
+        }
 
         .btn-add {
-            position: absolute; bottom: 25px; right: 25px;
+            position: absolute; bottom: 15px; right: 15px;
             background: var(--gold-gradient); color: #000; border: none;
-            width: 55px; height: 55px; border-radius: 20px; cursor: pointer;
-            font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4); transition: 0.3s;
+            width: 40px; height: 40px; border-radius: 12px; cursor: pointer;
+            font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
         }
-        .btn-add:active { transform: scale(0.8); }
+        @media (min-width: 768px) {
+            .btn-add { width: 55px; height: 55px; bottom: 25px; right: 25px; border-radius: 20px; }
+        }
 
-        /* Savatcha (Floating) */
+        /* SAVATCHA MOBILGA MOSLASHDI */
         .cart-float {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(200px);
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(200px);
             width: 90%; max-width: 500px; background: var(--accent);
-            padding: 20px 40px; border-radius: 30px; display: flex;
+            padding: 15px 25px; border-radius: 25px; display: flex;
             justify-content: space-between; align-items: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.9); z-index: 1000; transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8); z-index: 1000; transition: 0.6s;
         }
         .cart-float.active { transform: translateX(-50%) translateY(0); }
         
         .reset-btn {
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
-            color: white; padding: 10px 20px; border-radius: 15px; cursor: pointer;
+            color: white; padding: 10px 15px; border-radius: 12px; cursor: pointer;
         }
-
-        /* Til almashinuvi */
-        .lang-switch { margin-top: 30px; display: flex; justify-content: center; gap: 15px; }
-        .btn-lang {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 55, 0.4);
-            color: var(--gold); padding: 10px 30px; border-radius: 50px;
-            cursor: pointer; font-weight: 600; transition: 0.3s;
-        }
-        .btn-lang.active { background: var(--gold); color: #000; border-color: var(--gold); }
     </style>
 </head>
 <body>
 
 <div class="overlay">
-    <button class="waiter-btn animate__animated animate__pulse animate__infinite" onclick="alert('Waiter called to your table!')">
+    <button class="waiter-btn animate__animated animate__pulse animate__infinite" onclick="alert('Waiter called!')">
         <i class="fas fa-bell"></i>
     </button>
 
     <header>
         <div class="logo animate__animated animate__zoomIn">Dasturkhan</div>
         <div class="lang-switch">
-            <button class="btn-lang active" id="ruBtn" onclick="setLang('ru')">РУССКИЙ</button>
-            <button class="btn-lang" id="enBtn" onclick="setLang('en')">ENGLISH</button>
+            <button class="btn-lang active" id="ruBtn" onclick="setLang('ru')">РУС</button>
+            <button class="btn-lang" id="enBtn" onclick="setLang('en')">ENG</button>
         </div>
     </header>
 
     <div class="sticky-nav">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Поиск вкусных блюд..." onkeyup="filterMenu()">
+            <input type="text" id="searchInput" placeholder="Поиск..." onkeyup="filterMenu()">
         </div>
         <div class="categories" id="catBar"></div>
     </div>
@@ -185,15 +195,15 @@
 
     <div class="cart-float" id="cartFloat">
         <div>
-            <div id="cartCount" style="font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gold);">0 БЛЮД</div>
-            <div id="cartTotal" style="font-size: 1.8rem; font-weight: 900;">0 UZS</div>
+            <div id="cartCount" style="font-size: 0.8rem; font-weight: 600; color: var(--gold);">0 ТОВАРОВ</div>
+            <div id="cartTotal" style="font-size: 1.4rem; font-weight: 900;">0 UZS</div>
         </div>
         <button class="reset-btn" onclick="location.reload()">Reset</button>
     </div>
 </div>
 
 <script>
-    // RASM NOMLARI O'ZGARTIRILMADI
+    // MA'LUMOTLAR VA FUNKSIYALAR O'ZGARISHSIZ QOLDI
     const menuData = [
         { cat: 'salat', ru: "Шакароб", en: "Shakarob", p: 35000, img: "shakar ob.jpg" },
         { cat: 'salat', ru: "Ачик-чуchuk", en: "Achuchuk", p: 30000, img: "ashuk.jpg" },
@@ -225,15 +235,14 @@
     let cart = [];
 
     const cats = {
-        ru: { all: "Все меню", salat: "Салаты", zakuska: "Закуски", first: "Первые блюда", pasta: "Пасты", steak: "Стейки", drinks: "Бар" },
-        en: { all: "Full Menu", salat: "Salads", zakuska: "Starters", first: "Main Soups", pasta: "Pastas", steak: "Steaks", drinks: "Bar" }
+        ru: { all: "Все", salat: "Салаты", zakuska: "Закуски", first: "Первые", pasta: "Пасты", steak: "Стейки", drinks: "Бар" },
+        en: { all: "All", salat: "Salads", zakuska: "Starters", first: "Soups", pasta: "Pastas", steak: "Steaks", drinks: "Bar" }
     };
 
     function setLang(l) {
         lang = l;
         document.getElementById('ruBtn').classList.toggle('active', l==='ru');
         document.getElementById('enBtn').classList.toggle('active', l==='en');
-        document.getElementById('searchInput').placeholder = l==='ru' ? "Поиск вкусных блюд..." : "Search delicious food...";
         renderCats();
         filterMenu();
     }
@@ -264,7 +273,7 @@
         const container = document.getElementById('menuContainer');
         container.innerHTML = items.map((i, index) => `
             <div class="card animate__animated animate__fadeInUp" style="animation-delay: ${index * 0.05}s">
-                <img src="${i.img}" class="card-img" onerror="this.src='https://via.placeholder.com/400x400/111/D4AF37?text=Dasturkhan'">
+                <img src="${i.img}" class="card-img" onerror="this.src='https://via.placeholder.com/400x400/111/D4AF37?text=Food'">
                 <div class="card-info">
                     <div class="card-title">${lang === 'ru' ? i.ru : i.en}</div>
                     <div class="card-price">${i.p.toLocaleString()} UZS</div>
@@ -279,10 +288,9 @@
         const total = cart.reduce((a, b) => a + b, 0);
         const cartEl = document.getElementById('cartFloat');
         cartEl.classList.add('active');
-        document.getElementById('cartCount').innerText = lang === 'ru' ? `${cart.length} БЛЮД` : `${cart.length} ITEMS`;
-        document.getElementById('cartTotal').innerText = `${total.toLocaleString()} UZS`;
+        document.getElementById('cartCount').innerText = cart.length + (lang==='ru' ? " ТОВАРОВ" : " ITEMS");
+        document.getElementById('cartTotal').innerText = total.toLocaleString() + " UZS";
         
-        // Kichik "sakrash" animatsiyasi
         cartEl.classList.remove('animate__pulse');
         void cartEl.offsetWidth; 
         cartEl.classList.add('animate__animated', 'animate__pulse');
