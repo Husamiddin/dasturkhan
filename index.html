@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dasturkhan Bar</title>
+    <title>Dasturkhan Bar & Restaurant</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -44,7 +44,6 @@
             position: relative;
         }
 
-        /* LOGO MOBIL VA PC UCHUN MOSLASHDI */
         .logo {
             font-family: "Playwrite IE", cursive;
             font-size: clamp(2.2rem, 10vw, 4.5rem);
@@ -52,7 +51,6 @@
             text-transform: uppercase; 
             letter-spacing: 6px;
             background: var(--gold-gradient);
-            --webkit-background-clip: text;
             filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.8));
             margin: 0 auto;
         }
@@ -95,7 +93,6 @@
             border-color: transparent; font-weight: 800; transform: scale(1.05);
         }
 
-        /* TUGMALAR DIZAYNI */
         .lang-switch { margin-top: 20px; display: flex; justify-content: center; gap: 10px; }
         .btn-lang {
             background: transparent; border: 1px solid var(--gold);
@@ -104,24 +101,16 @@
         }
         .btn-lang.active { background: var(--gold-gradient); color: #000; border-color: transparent; }
 
-        /* MENU GRID - PC VA ANDROID UCHUN ALOHIDA */
         .menu-grid {
             max-width: 1400px; margin: 20px auto;
             display: grid;
             padding: 15px;
-            /* DEFAULT: Android/Mobil uchun 2 ta ustun */
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
 
-        /* PC UCHUN 4 TA USTUN */
         @media (min-width: 1024px) {
             .menu-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        }
-
-        /* PLANSHET UCHUN 3 TA USTUN */
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
         }
 
         .card {
@@ -133,15 +122,8 @@
         .card-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; transition: 0.5s; }
         .card-info { padding: 15px; background: linear-gradient(to top, #000, transparent); }
         
-        /* MOBILDA MATN O'LCHAMI */
         .card-title { font-size: 1rem; color: var(--gold); font-weight: 800; margin-bottom: 5px; height: 2.4em; overflow: hidden; }
         .card-price { font-size: 1.1rem; font-weight: 900; color: #fff; }
-
-        @media (min-width: 768px) {
-            .card-info { padding: 25px; }
-            .card-title { font-size: 1.4rem; }
-            .card-price { font-size: 1.3rem; }
-        }
 
         .btn-add {
             position: absolute; bottom: 15px; right: 15px;
@@ -149,11 +131,7 @@
             width: 40px; height: 40px; border-radius: 12px; cursor: pointer;
             font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
         }
-        @media (min-width: 768px) {
-            .btn-add { width: 55px; height: 55px; bottom: 25px; right: 25px; border-radius: 20px; }
-        }
 
-        /* SAVATCHA MOBILGA MOSLASHDI */
         .cart-float {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(200px);
             width: 90%; max-width: 500px; background: var(--accent);
@@ -172,7 +150,7 @@
 <body>
 
 <div class="overlay">
-    <button class="waiter-btn animate__animated animate__pulse animate__infinite" onclick="alert('Waiter called!')">
+    <button class="waiter-btn animate__animated animate__pulse animate__infinite" onclick="alert('Официант вызван!')">
         <i class="fas fa-bell"></i>
     </button>
 
@@ -186,7 +164,7 @@
 
     <div class="sticky-nav">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Поиск..." onkeyup="filterMenu()">
+            <input type="text" id="searchInput" placeholder="Поиск блюд..." onkeyup="filterMenu()">
         </div>
         <div class="categories" id="catBar"></div>
     </div>
@@ -198,35 +176,47 @@
             <div id="cartCount" style="font-size: 0.8rem; font-weight: 600; color: var(--gold);">0 ТОВАРОВ</div>
             <div id="cartTotal" style="font-size: 1.4rem; font-weight: 900;">0 UZS</div>
         </div>
-        <button class="reset-btn" onclick="location.reload()">Reset</button>
+        <button class="reset-btn" onclick="location.reload()">Очистить</button>
     </div>
 </div>
 
 <script>
-    // MA'LUMOTLAR VA FUNKSIYALAR O'ZGARISHSIZ QOLDI
+    // TO'LIQ YANGILANGAN MA'LUMOTLAR BAZASI
     const menuData = [
+        // SALATLAR
         { cat: 'salat', ru: "Шакароб", en: "Shakarob", p: 35000, img: "shakar ob.jpg" },
-        { cat: 'salat', ru: "Ачик-чуchuk", en: "Achuchuk", p: 30000, img: "ashuk.jpg" },
+        { cat: 'salat', ru: "Ачик-чучук", en: "Achuchuk", p: 30000, img: "ashuk.jpg" },
         { cat: 'salat', ru: "Греческий салат", en: "Greek Salad", p: 60000, img: "pomidor salar grechiski.jpg" },
-        { cat: 'salat', ru: "Греческий", en: "Greek Salad V2", p: 60000, img: "2 chi grechiski.jpg" },
-        { cat: 'salat', ru: "Хрустящие баклажаны", en: "Crispy Eggplant", p: 60000, img: "baklachan.jpg" },
-        { cat: 'salat', ru: "Лосось на подушке", en: "Salmon on Pillow", p: 80000, img: "losoya salat.jpg" },
-        { cat: 'salat', ru: "Креветки с рукколой", en: "Shrimp & Rucola", p: 80000, img: "krevetki salat.jpg" },
+        { cat: 'salat', ru: "Хрустящие баклажаны", en: "Crispy Eggplant", p: 65000, img: "baklachan.jpg" },
+        { cat: 'salat', ru: "Лосось на подушке", en: "Salmon Salad", p: 85000, img: "losoya salat.jpg" },
+        { cat: 'salat', ru: "Креветки с рукколой", en: "Shrimp & Rucola", p: 85000, img: "krevetki salat.jpg" },
         { cat: 'salat', ru: "Груша в карамели", en: "Caramel Pear", p: 60000, img: "karamamel.jpg" },
-        { cat: 'salat', ru: "Рубиновая свёкла", en: "Beetroot Salad", p: 50000, img: "sbekla salat.jpg" },
-        { cat: 'zakuska', ru: "Сырная тарелка", en: "Cheese Plate", p: 170000, img: "cheese plate.jpg" },
-        { cat: 'zakuska', ru: "Антипаста Ciao", en: "Antipasta Ciao", p: 200000, img: "ciao.jpg" },
-        { cat: 'zakuska', ru: "Долма", en: "Dolma", p: 60000, img: "dolma.jpg" },
-        { cat: 'zakuska', ru: "Тартар из говядины", en: "Beef Tartare", p: 90000, img: "tartare.jpg" },
-        { cat: 'zakuska', ru: "Биф-ролл", en: "Beef Roll", p: 80000, img: "roll.jpg" },
-        { cat: 'zakuska', ru: "Самса мясная", en: "Meat Somsa", p: 25000, img: "gosht somsa.jpg" },
-        { cat: 'pasta', ru: "Болоньезе", en: "Bolognese", p: 60000, img: "bolognese.jpg" },
-        { cat: 'pasta', ru: "Карбонара с уткой", en: "Duck Carbonara", p: 60000, img: "carbonara.jpg" },
-        { cat: 'steak', ru: "Рибай стейк", en: "Ribeye Steak", p: 60000, img: "steak.jpg" },
-        { cat: 'steak', ru: "Бон филе", en: "Bon Fillet", p: 180000, img: "fillet.jpg" },
-        { cat: 'first', ru: "Mastava", en: "Mastava", p: 40000, img: "mastava.jpg" },
-        { cat: 'first', ru: "Крем суп", en: "Cream Soup", p: 30000, img: "krem sup.jpg" },
-        { cat: 'drinks', ru: "Лимонад Манго-лайм", en: "Mango-Lime Lemonade", p: 90000, img: "mango lime.jpg" },
+        { cat: 'salat', ru: "Рубиновая свёкла", en: "Beetroot Salad", p: 55000, img: "sbekla salat.jpg" },
+
+        // ZAKUSKALAR VA GARNIRLAR
+        { cat: 'zakuska', ru: "Манты (3 шт)", en: "Manti (3 pcs)", p: 45000, img: "manti.jpg" },
+        { cat: 'zakuska', ru: "Картофель по-деревенски", en: "Potato Wedges", p: 25000, img: "kartoshka_fri.jpg" },
+        { cat: 'zakuska', ru: "Картофельное пюре", en: "Mashed Potatoes", p: 20000, img: "pyuro.jpg" },
+        { cat: 'zakuska', ru: "Креветки на гриле", en: "Grilled Shrimp", p: 95000, img: "krevetka_grill.jpg" },
+        { cat: 'zakuska', ru: "Сырная тарелка", en: "Cheese Plate", p: 175000, img: "cheese plate.jpg" },
+        { cat: 'zakuska', ru: "Долма", en: "Dolma", p: 65000, img: "dolma.jpg" },
+        { cat: 'zakuska', ru: "Тартар из говядины", en: "Beef Tartare", p: 95000, img: "tartare.jpg" },
+
+        // BIRINCHI TAOMLAR
+        { cat: 'first', ru: "Лагман", en: "Lagman", p: 55000, img: "lagman.jpg" },
+        { cat: 'first', ru: "Солянка", en: "Solyanka", p: 50000, img: "solyanka.jpg" },
+        { cat: 'first', ru: "Сливочный суп с лососем", en: "Creamy Salmon Soup", p: 80000, img: "losos_sup.jpg" },
+        { cat: 'first', ru: "Маstava", en: "Mastava", p: 45000, img: "mastava.jpg" },
+        { cat: 'first', ru: "Крем суп", en: "Cream Soup", p: 35000, img: "krem sup.jpg" },
+
+        // ASOSIY TAOMLAR VA STEIKLAR
+        { cat: 'steak', ru: "Куриный шницель", en: "Chicken Schnitzel", p: 70000, img: "shnitsel.jpg" },
+        { cat: 'steak', ru: "Лосось на гриле", en: "Grilled Salmon", p: 135000, img: "losos_grill.jpg" },
+        { cat: 'steak', ru: "Рибай стейк", en: "Ribeye Steak", p: 185000, img: "steak.jpg" },
+        { cat: 'steak', ru: "Бон филе", en: "Bon Fillet", p: 195000, img: "fillet.jpg" },
+
+        // BAR VA ICHIMLIKLAR
+        { cat: 'drinks', ru: "Лимонад Манго-лайм", en: "Mango-Lime Lemonade", p: 85000, img: "mango lime.jpg" },
         { cat: 'drinks', ru: "Кофе Латте", en: "Latte Coffee", p: 35000, img: "latte.jpg" }
     ];
 
@@ -235,14 +225,15 @@
     let cart = [];
 
     const cats = {
-        ru: { all: "Все", salat: "Салаты", zakuska: "Закуски", first: "Первые", pasta: "Пасты", steak: "Стейки", drinks: "Бар" },
-        en: { all: "All", salat: "Salads", zakuska: "Starters", first: "Soups", pasta: "Pastas", steak: "Steaks", drinks: "Bar" }
+        ru: { all: "Все", salat: "Салаты", zakuska: "Закуски", first: "Первые", steak: "Горячее", drinks: "Бар" },
+        en: { all: "All", salat: "Salads", zakuska: "Starters", first: "Soups", steak: "Main Dish", drinks: "Bar" }
     };
 
     function setLang(l) {
         lang = l;
         document.getElementById('ruBtn').classList.toggle('active', l==='ru');
         document.getElementById('enBtn').classList.toggle('active', l==='en');
+        document.getElementById('searchInput').placeholder = (l==='ru' ? "Поиск блюд..." : "Search food...");
         renderCats();
         filterMenu();
     }
@@ -296,6 +287,7 @@
         cartEl.classList.add('animate__animated', 'animate__pulse');
     }
 
+    // ILK ISHGA TUSHIRISH
     setLang('ru');
 </script>
 </body>
