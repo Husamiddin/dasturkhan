@@ -11,18 +11,20 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Mogra&family=Oswald:wght@200..700&family=Playwrite+IE:wght@100..400&display=swap');
+        
         :root { 
             --gold: #D4AF37; 
             --white: #ffffff; 
             --glass: rgba(15, 15, 15, 0.85); 
             --accent: #1e3d1a; 
             --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F1D18A 50%, #D4AF37 100%);
+            --dark-bg: #050505;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            background: #050505 url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070') no-repeat center center fixed;
+            background: var(--dark-bg) url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070') no-repeat center center fixed;
             background-size: cover;
             color: var(--white);
             font-family: 'Outfit', sans-serif;
@@ -30,132 +32,192 @@
         }
 
         .overlay { 
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.92)); 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.95)); 
             min-height: 100vh; 
             padding-bottom: 120px; 
         }
 
         header {
             text-align: center; 
-            padding: 40px 10px;
+            padding: 40px 10px 20px;
             background: rgba(0,0,0,0.7); 
             backdrop-filter: blur(10px);
-            border-bottom: 3px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
             position: relative;
         }
 
         .logo {
             font-family: "Playwrite IE", cursive;
-            font-size: clamp(2.2rem, 10vw, 4.5rem);
+            font-size: clamp(2rem, 8vw, 4rem);
             font-weight: 900;
             text-transform: uppercase; 
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.8));
             margin: 0 auto;
         }
 
+        /* Yaxshilangan ofitsiant tugmasi */
         .waiter-btn {
             position: fixed; top: 20px; right: 20px; z-index: 1000;
             background: var(--gold-gradient); color: #000; border: none;
-            padding: 12px 25px; border-radius: 50px; font-weight: 800;
-            cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            transition: 0.3s;
+            width: 50px; height: 50px; border-radius: 50%; font-weight: 800;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.2rem;
         }
+        .waiter-btn:hover { transform: scale(1.1); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6); }
 
         .sticky-nav {
-            position: sticky; top: 0; z-index: 999;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
-            padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky; top: 0; z-index: 900;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+            padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .search-box { max-width: 600px; margin: 0 auto; padding: 0 20px; }
+        .search-box { max-width: 800px; margin: 0 auto; padding: 0 20px; }
         #searchInput {
-            width: 100%; padding: 15px 25px; border-radius: 50px;
+            width: 100%; padding: 12px 25px; border-radius: 50px;
             border: 1px solid rgba(212, 175, 55, 0.4); background: rgba(255,255,255,0.05);
-            color: white; font-size: 1rem; outline: none;
+            color: white; font-size: 1rem; outline: none; transition: 0.3s;
         }
+        #searchInput:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
 
         .categories {
-            display: flex; gap: 12px; overflow-x: auto; 
-            padding: 20px; scrollbar-width: none; justify-content: start;
+            display: flex; gap: 10px; overflow-x: auto; 
+            padding: 15px 20px; scrollbar-width: none; justify-content: flex-start;
+            max-width: 1000px; margin: 0 auto;
         }
         .categories::-webkit-scrollbar { display: none; }
-        @media (min-width: 768px) { .categories { justify-content: center; } }
+        @media (min-width: 768px) { .categories { justify-content: center; flex-wrap: wrap; } }
 
         .cat-btn {
-            padding: 10px 25px; border-radius: 50px; border: 1px solid #333;
-            background: var(--glass); color: #aaa; cursor: pointer; 
-            white-space: nowrap; transition: 0.4s; font-weight: 500;
+            padding: 8px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.5); color: #ccc; cursor: pointer; 
+            white-space: nowrap; transition: 0.3s; font-weight: 500; font-size: 0.9rem;
         }
+        .cat-btn:hover { border-color: var(--gold); color: white; }
         .cat-btn.active { 
             background: var(--gold-gradient); color: #000; 
             border-color: transparent; font-weight: 800; transform: scale(1.05);
         }
 
-        .lang-switch { margin-top: 20px; display: flex; justify-content: center; gap: 10px; }
+        .lang-switch { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
         .btn-lang {
             background: transparent; border: 1px solid var(--gold);
-            color: var(--gold); padding: 8px 20px; border-radius: 50px;
-            cursor: pointer; font-weight: 800; transition: 0.3s;
+            color: var(--gold); padding: 5px 15px; border-radius: 50px;
+            cursor: pointer; font-weight: 800; transition: 0.3s; font-size: 0.8rem;
         }
         .btn-lang.active { background: var(--gold-gradient); color: #000; border-color: transparent; }
 
+        /* Yaxshilangan Grid: PC va Telefon uchun avtomatik moslashadi */
         .menu-grid {
             max-width: 1400px; margin: 20px auto;
             display: grid;
             padding: 15px;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 15px;
         }
-
-        @media (min-width: 1024px) {
-            .menu-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        @media (min-width: 768px) {
+            .menu-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; padding: 25px; }
         }
 
         .card {
-            background: var(--glass); border-radius: 25px; overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.4s;
-            position: relative;
+            background: var(--glass); border-radius: 20px; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05); transition: transform 0.3s, box-shadow 0.3s;
+            position: relative; display: flex; flex-direction: column;
         }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); border-color: rgba(212, 175, 55, 0.3); }
 
-        .card-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; transition: 0.5s; }
-        .card-info { padding: 15px; background: linear-gradient(to top, #000, transparent); }
+        .card-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+        .card-info { padding: 15px; background: linear-gradient(to top, rgba(0,0,0,1) 20%, transparent); flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-end; }
         
-        .card-title { font-size: 1rem; color: var(--gold); font-weight: 800; margin-bottom: 5px; height: 2.4em; overflow: hidden; }
-        .card-price { font-size: 1.1rem; font-weight: 900; color: #fff; }
+        .card-title { font-size: 1rem; color: var(--gold); font-weight: 700; margin-bottom: 5px; line-height: 1.2; }
+        .card-price { font-size: 1.1rem; font-weight: 900; color: #fff; margin-bottom: 10px; }
 
         .btn-add {
-            position: absolute; bottom: 15px; right: 15px;
             background: var(--gold-gradient); color: #000; border: none;
-            width: 40px; height: 40px; border-radius: 12px; cursor: pointer;
-            font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+            width: 100%; padding: 10px; border-radius: 12px; cursor: pointer;
+            font-size: 1rem; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: 0.2s;
         }
+        .btn-add:active { transform: scale(0.95); }
 
+        /* Yaxshilangan Savat (Floating Bar) */
         .cart-float {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(200px);
-            width: 90%; max-width: 500px; background: var(--accent);
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(150px);
+            width: 90%; max-width: 600px; background: var(--glass); border: 1px solid var(--gold);
             padding: 15px 25px; border-radius: 25px; display: flex;
-            justify-content: space-between; align-items: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8); z-index: 1000; transition: 0.6s;
+            justify-content: space-between; align-items: center; cursor: pointer;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.9); z-index: 1000; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(15px);
         }
         .cart-float.active { transform: translateX(-50%) translateY(0); }
+        .cart-float:hover { background: rgba(20, 20, 20, 0.95); }
         
-        .reset-btn {
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
-            color: white; padding: 10px 15px; border-radius: 12px; cursor: pointer;
+        .cart-info-text { display: flex; flex-direction: column; }
+        .cart-icon-wrapper { font-size: 1.5rem; color: var(--gold); display: flex; align-items: center; gap: 15px; }
+
+        /* Modal Oyna (Savat ichi) */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: flex-end;
+            z-index: 2000; opacity: 0; pointer-events: none; transition: 0.4s;
         }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        @media (min-width: 768px) { .modal-overlay { align-items: center; } }
+
+        .cart-modal {
+            background: #111; width: 100%; max-width: 600px; max-height: 85vh;
+            border-radius: 25px 25px 0 0; padding: 25px; display: flex; flex-direction: column;
+            transform: translateY(100%); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 2px solid var(--gold);
+        }
+        @media (min-width: 768px) { .cart-modal { border-radius: 25px; border: 2px solid var(--gold); transform: translateY(50px) scale(0.9); } }
+        .modal-overlay.active .cart-modal { transform: translateY(0) scale(1); }
+
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .modal-header h2 { color: var(--gold); font-size: 1.5rem; }
+        .close-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        .cart-items { flex-grow: 1; overflow-y: auto; padding-right: 5px; }
+        .cart-items::-webkit-scrollbar { width: 5px; }
+        .cart-items::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 5px; }
+
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px dashed #333; }
+        .cart-item-info { flex-grow: 1; }
+        .cart-item-title { font-weight: 600; font-size: 1rem; margin-bottom: 5px; }
+        .cart-item-price { color: #aaa; font-size: 0.9rem; }
+        
+        .qty-controls { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border-radius: 50px; padding: 5px 10px; }
+        .qty-btn { background: none; border: none; color: var(--gold); font-size: 1.2rem; cursor: pointer; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; }
+        
+        .modal-footer { margin-top: 20px; padding-top: 15px; border-top: 1px solid #333; }
+        .total-line { display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; }
+        .checkout-btn { width: 100%; padding: 15px; background: var(--gold-gradient); border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 800; cursor: pointer; }
+
+        /* Toast Bildirishnomalar */
+        #toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 3000; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background: var(--glass); border-left: 4px solid var(--gold); color: white; padding: 12px 25px; border-radius: 8px; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.5); animation: slideDown 0.3s forwards, fadeOut 0.3s 2.7s forwards; }
+        @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
     </style>
 </head>
 <body>
 
+<div id="toast-container"></div>
+
 <div class="overlay">
-    <button class="waiter-btn animate__animated animate__pulse animate__infinite" onclick="alert('Официант вызван!')">
-        <i class="fas fa-bell"></i>
+    <button class="waiter-btn" onclick="callWaiter()">
+        <i class="fas fa-concierge-bell"></i>
     </button>
 
     <header>
-        <div class="logo animate__animated animate__zoomIn">Dasturkhan</div>
+        <div class="logo animate__animated animate__fadeInDown">Dasturkhan</div>
         <div class="lang-switch">
             <button class="btn-lang active" id="ruBtn" onclick="setLang('ru')">РУС</button>
             <button class="btn-lang" id="enBtn" onclick="setLang('en')">ENG</button>
@@ -164,78 +226,136 @@
 
     <div class="sticky-nav">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Поиск блюд..." onkeyup="filterMenu()">
+            <input type="text" id="searchInput" placeholder="Поиск блюд..." oninput="filterMenu()">
         </div>
         <div class="categories" id="catBar"></div>
     </div>
 
     <div class="menu-grid" id="menuContainer"></div>
 
-    <div class="cart-float" id="cartFloat">
-        <div>
-            <div id="cartCount" style="font-size: 0.8rem; font-weight: 600; color: var(--gold);">0 ТОВАРОВ</div>
-            <div id="cartTotal" style="font-size: 1.4rem; font-weight: 900;">0 UZS</div>
+    <!-- Hozirgi holatni ko'rsatuvchi pastki suzuvchi panel -->
+    <div class="cart-float" id="cartFloat" onclick="toggleModal(true)">
+        <div class="cart-icon-wrapper">
+            <i class="fas fa-shopping-bag"></i>
+            <div class="cart-info-text">
+                <span id="cartTotal" style="font-size: 1.3rem; font-weight: 900; color: white;">0 UZS</span>
+                <span id="cartCount" style="font-size: 0.85rem; font-weight: 600; color: #aaa;">0 ТОВАРОВ</span>
+            </div>
         </div>
-        <button class="reset-btn" onclick="location.reload()">Очистить</button>
+        <i class="fas fa-chevron-up" style="color: var(--gold);"></i>
+    </div>
+</div>
+
+<!-- Savat Modali -->
+<div class="modal-overlay" id="cartModal" onclick="if(event.target === this) toggleModal(false)">
+    <div class="cart-modal">
+        <div class="modal-header">
+            <h2 id="modalTitle">Ваш заказ</h2>
+            <button class="close-btn" onclick="toggleModal(false)"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <!-- Savatdagi narsalar shu yerga tushadi -->
+        </div>
+        <div class="modal-footer">
+            <div class="total-line">
+                <span id="modalTotalLabel">Итого:</span>
+                <span id="modalTotalValue" style="color: var(--gold);">0 UZS</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" onclick="checkout()">Оформить заказ</button>
+        </div>
     </div>
 </div>
 
 <script>
-    // TO'LIQ YANGILANGAN MA'LUMOTLAR BAZASI
+    // ID qo'shilgan, qolgan ma'lumotlar asl holida (rasmlarga tegilmadi)
     const menuData = [
         // SALATLAR
-        { cat: 'salat', ru: "Шакароб", en: "Shakarob", p: 35000, img: "shakar ob.jpg" },
-        { cat: 'salat', ru: "Ачик-чучук", en: "Achuchuk", p: 30000, img: "ashuk.jpg" },
-        { cat: 'salat', ru: "Греческий салат", en: "Greek Salad", p: 60000, img: "pomidor salar grechiski.jpg" },
-        { cat: 'salat', ru: "Хрустящие баклажаны", en: "Crispy Eggplant", p: 65000, img: "baklachan.jpg" },
-        { cat: 'salat', ru: "Лосось на подушке", en: "Salmon Salad", p: 85000, img: "losoya salat.jpg" },
-        { cat: 'salat', ru: "Креветки с рукколой", en: "Shrimp & Rucola", p: 85000, img: "krevetki salat.jpg" },
-        { cat: 'salat', ru: "Груша в карамели", en: "Caramel Pear", p: 60000, img: "karamamel.jpg" },
-        { cat: 'salat', ru: "Рубиновая свёкла", en: "Beetroot Salad", p: 55000, img: "sbekla salat.jpg" },
+        { id: 1, cat: 'salat', ru: "Шакароб", en: "Shakarob", p: 35000, img: "shakar ob.jpg" },
+        { id: 2, cat: 'salat', ru: "Ачик-чучук", en: "Achuchuk", p: 30000, img: "ashuk.jpg" },
+        { id: 3, cat: 'salat', ru: "Греческий салат", en: "Greek Salad", p: 60000, img: "pomidor salar grechiski.jpg" },
+        { id: 4, cat: 'salat', ru: "Хрустящие баклажаны", en: "Crispy Eggplant", p: 65000, img: "baklachan.jpg" },
+        { id: 5, cat: 'salat', ru: "Лосось на подушке", en: "Salmon Salad", p: 85000, img: "losoya salat.jpg" },
+        { id: 6, cat: 'salat', ru: "Креветки с рукколой", en: "Shrimp & Rucola", p: 85000, img: "krevetki salat.jpg" },
+        { id: 7, cat: 'salat', ru: "Груша в карамели", en: "Caramel Pear", p: 60000, img: "karamamel.jpg" },
+        { id: 8, cat: 'salat', ru: "Рубиновая свёкла", en: "Beetroot Salad", p: 55000, img: "sbekla salat.jpg" },
 
         // ZAKUSKALAR VA GARNIRLAR
-        { cat: 'zakuska', ru: "Манты (3 шт)", en: "Manti (3 pcs)", p: 45000, img: "manti.jpg" },
-        { cat: 'zakuska', ru: "Картофель по-деревенски", en: "Potato Wedges", p: 25000, img: "kartoshka_fri.jpg" },
-        { cat: 'zakuska', ru: "Картофельное пюре", en: "Mashed Potatoes", p: 20000, img: "pyuro.jpg" },
-        { cat: 'zakuska', ru: "Креветки на гриле", en: "Grilled Shrimp", p: 95000, img: "krevetka_grill.jpg" },
-        { cat: 'zakuska', ru: "Сырная тарелка", en: "Cheese Plate", p: 175000, img: "cheese plate.jpg" },
-        { cat: 'zakuska', ru: "Долма", en: "Dolma", p: 65000, img: "dolma.jpg" },
-        { cat: 'zakuska', ru: "Тартар из говядины", en: "Beef Tartare", p: 95000, img: "tartare.jpg" },
+        { id: 9, cat: 'zakuska', ru: "Манты (3 шт)", en: "Manti (3 pcs)", p: 45000, img: "manti.jpg" },
+        { id: 10, cat: 'zakuska', ru: "Картофель по-деревенски", en: "Potato Wedges", p: 25000, img: "kartoshka_fri.jpg" },
+        { id: 11, cat: 'zakuska', ru: "Картофельное пюре", en: "Mashed Potatoes", p: 20000, img: "pyuro.jpg" },
+        { id: 12, cat: 'zakuska', ru: "Креветки на гриле", en: "Grilled Shrimp", p: 95000, img: "krevetka_grill.jpg" },
+        { id: 13, cat: 'zakuska', ru: "Сырная тарелка", en: "Cheese Plate", p: 175000, img: "cheese plate.jpg" },
+        { id: 14, cat: 'zakuska', ru: "Долма", en: "Dolma", p: 65000, img: "dolma.jpg" },
+        { id: 15, cat: 'zakuska', ru: "Тартар из говядины", en: "Beef Tartare", p: 95000, img: "tartare.jpg" },
 
         // BIRINCHI TAOMLAR
-        { cat: 'first', ru: "Лагман", en: "Lagman", p: 55000, img: "lagman.jpg" },
-        { cat: 'first', ru: "Солянка", en: "Solyanka", p: 50000, img: "solyanka.jpg" },
-        { cat: 'first', ru: "Сливочный суп с лососем", en: "Creamy Salmon Soup", p: 80000, img: "losos_sup.jpg" },
-        { cat: 'first', ru: "Маstava", en: "Mastava", p: 45000, img: "mastava.jpg" },
-        { cat: 'first', ru: "Крем суп", en: "Cream Soup", p: 35000, img: "krem sup.jpg" },
+        { id: 16, cat: 'first', ru: "Лагман", en: "Lagman", p: 55000, img: "lagman.jpg" },
+        { id: 17, cat: 'first', ru: "Солянка", en: "Solyanka", p: 50000, img: "solyanka.jpg" },
+        { id: 18, cat: 'first', ru: "Сливочный суп с лососем", en: "Creamy Salmon Soup", p: 80000, img: "losos_sup.jpg" },
+        { id: 19, cat: 'first', ru: "Мастава", en: "Mastava", p: 45000, img: "mastava.jpg" },
+        { id: 20, cat: 'first', ru: "Крем суп", en: "Cream Soup", p: 35000, img: "krem sup.jpg" },
 
         // ASOSIY TAOMLAR VA STEIKLAR
-        { cat: 'steak', ru: "Куриный шницель", en: "Chicken Schnitzel", p: 70000, img: "shnitsel.jpg" },
-        { cat: 'steak', ru: "Лосось на гриле", en: "Grilled Salmon", p: 135000, img: "losos_grill.jpg" },
-        { cat: 'steak', ru: "Рибай стейк", en: "Ribeye Steak", p: 185000, img: "steak.jpg" },
-        { cat: 'steak', ru: "Бон филе", en: "Bon Fillet", p: 195000, img: "fillet.jpg" },
+        { id: 21, cat: 'steak', ru: "Куриный шницель", en: "Chicken Schnitzel", p: 70000, img: "shnitsel.jpg" },
+        { id: 22, cat: 'steak', ru: "Лосось на гриле", en: "Grilled Salmon", p: 135000, img: "losos_grill.jpg" },
+        { id: 23, cat: 'steak', ru: "Рибай стейк", en: "Ribeye Steak", p: 185000, img: "steak.jpg" },
+        { id: 24, cat: 'steak', ru: "Бон филе", en: "Bon Fillet", p: 195000, img: "fillet.jpg" },
 
         // BAR VA ICHIMLIKLAR
-        { cat: 'drinks', ru: "Лимонад Манго-лайм", en: "Mango-Lime Lemonade", p: 85000, img: "mango lime.jpg" },
-        { cat: 'drinks', ru: "Кофе Латте", en: "Latte Coffee", p: 35000, img: "latte.jpg" }
+        { id: 25, cat: 'drinks', ru: "Лимонад Манго-лайм", en: "Mango-Lime Lemonade", p: 85000, img: "mango lime.jpg" },
+        { id: 26, cat: 'drinks', ru: "Кофе Латте", en: "Latte Coffee", p: 35000, img: "latte.jpg" }
     ];
 
     let lang = 'ru';
     let currentCat = 'all';
-    let cart = [];
+    // Savat endi obyektlar ro'yxati: { id, qty }
+    let cart = {}; 
+
+    const textUI = {
+        ru: { 
+            search: "Поиск блюд...", items: "ТОВАРОВ", add: "В корзину", 
+            waiter: "Официант скоро подойдет!", added: "Добавлено в корзину",
+            cartTitle: "Ваш заказ", total: "Итого:", checkout: "Оформить заказ", empty: "Корзина пуста", success: "Заказ успешно оформлен!"
+        },
+        en: { 
+            search: "Search menu...", items: "ITEMS", add: "Add to cart", 
+            waiter: "Waiter is on the way!", added: "Added to cart",
+            cartTitle: "Your Order", total: "Total:", checkout: "Checkout", empty: "Cart is empty", success: "Order placed successfully!"
+        }
+    };
 
     const cats = {
         ru: { all: "Все", salat: "Салаты", zakuska: "Закуски", first: "Первые", steak: "Горячее", drinks: "Бар" },
         en: { all: "All", salat: "Salads", zakuska: "Starters", first: "Soups", steak: "Main Dish", drinks: "Bar" }
     };
 
+    function showToast(msg) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fas fa-check-circle" style="color: var(--gold); margin-right: 8px;"></i> ${msg}`;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    function callWaiter() {
+        showToast(textUI[lang].waiter);
+    }
+
     function setLang(l) {
         lang = l;
         document.getElementById('ruBtn').classList.toggle('active', l==='ru');
         document.getElementById('enBtn').classList.toggle('active', l==='en');
-        document.getElementById('searchInput').placeholder = (l==='ru' ? "Поиск блюд..." : "Search food...");
+        document.getElementById('searchInput').placeholder = textUI[lang].search;
+        
+        // Update Modal Texts
+        document.getElementById('modalTitle').innerText = textUI[lang].cartTitle;
+        document.getElementById('modalTotalLabel').innerText = textUI[lang].total;
+        document.getElementById('checkoutBtn').innerText = textUI[lang].checkout;
+
         renderCats();
         filterMenu();
+        updateCartUI();
     }
 
     function renderCats() {
@@ -268,23 +388,93 @@
                 <div class="card-info">
                     <div class="card-title">${lang === 'ru' ? i.ru : i.en}</div>
                     <div class="card-price">${i.p.toLocaleString()} UZS</div>
-                    <button class="btn-add" onclick="addToCart(${i.p})"><i class="fas fa-plus"></i></button>
+                    <button class="btn-add" onclick="addToCart(${i.id})"><i class="fas fa-cart-plus"></i> ${textUI[lang].add}</button>
                 </div>
             </div>
         `).join('');
     }
 
-    function addToCart(price) {
-        cart.push(price);
-        const total = cart.reduce((a, b) => a + b, 0);
-        const cartEl = document.getElementById('cartFloat');
-        cartEl.classList.add('active');
-        document.getElementById('cartCount').innerText = cart.length + (lang==='ru' ? " ТОВАРОВ" : " ITEMS");
-        document.getElementById('cartTotal').innerText = total.toLocaleString() + " UZS";
-        
-        cartEl.classList.remove('animate__pulse');
-        void cartEl.offsetWidth; 
-        cartEl.classList.add('animate__animated', 'animate__pulse');
+    function addToCart(id) {
+        if(cart[id]) {
+            cart[id]++;
+        } else {
+            cart[id] = 1;
+        }
+        showToast(textUI[lang].added);
+        updateCartUI();
+    }
+
+    function changeQty(id, delta) {
+        if(cart[id]) {
+            cart[id] += delta;
+            if(cart[id] <= 0) delete cart[id];
+            updateCartUI();
+        }
+    }
+
+    function updateCartUI() {
+        let totalQty = 0;
+        let totalPrice = 0;
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        let cartHTML = '';
+
+        Object.keys(cart).forEach(id => {
+            const item = menuData.find(m => m.id == id);
+            if(item) {
+                const qty = cart[id];
+                totalQty += qty;
+                totalPrice += (item.p * qty);
+                const name = lang === 'ru' ? item.ru : item.en;
+                
+                cartHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${name}</div>
+                            <div class="cart-item-price">${(item.p * qty).toLocaleString()} UZS</div>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="changeQty(${id}, -1)"><i class="fas fa-minus"></i></button>
+                            <span>${qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${id}, 1)"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        if(totalQty === 0) {
+            cartHTML = `<div style="text-align:center; padding: 30px; color: #777;">${textUI[lang].empty}</div>`;
+            document.getElementById('cartFloat').classList.remove('active');
+        } else {
+            document.getElementById('cartFloat').classList.add('active');
+            
+            // Animatsiya qo'shish
+            const floatBar = document.getElementById('cartFloat');
+            floatBar.style.transform = 'translateX(-50%) scale(1.05)';
+            setTimeout(() => { floatBar.style.transform = 'translateX(-50%) scale(1)'; }, 200);
+        }
+
+        cartItemsContainer.innerHTML = cartHTML;
+        document.getElementById('cartCount').innerText = totalQty + " " + textUI[lang].items;
+        document.getElementById('cartTotal').innerText = totalPrice.toLocaleString() + " UZS";
+        document.getElementById('modalTotalValue').innerText = totalPrice.toLocaleString() + " UZS";
+    }
+
+    function toggleModal(show) {
+        const modal = document.getElementById('cartModal');
+        if(show) {
+            modal.classList.add('active');
+        } else {
+            modal.classList.remove('active');
+        }
+    }
+
+    function checkout() {
+        if(Object.keys(cart).length === 0) return;
+        showToast(textUI[lang].success);
+        cart = {};
+        updateCartUI();
+        toggleModal(false);
     }
 
     // ILK ISHGA TUSHIRISH
